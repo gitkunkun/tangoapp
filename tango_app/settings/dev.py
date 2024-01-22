@@ -2,6 +2,12 @@ from .common import *
 
 ALLOWED_HOSTS = [
     "debug_toolbar",
+    '*',
+]
+
+# ...
+INSTALLED_APPS += [
+    "debug_toolbar",
 ]
 
 MIDDLEWARE += [
