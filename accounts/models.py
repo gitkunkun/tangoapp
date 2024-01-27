@@ -8,7 +8,6 @@ class User(AbstractUser):
         upload_to="user_icon/",
         blank=True,
     )
-    point = models.IntegerField(default=0)
     profile = models.TextField("プロフィール", max_length=500)
 
     def icon_url(self):

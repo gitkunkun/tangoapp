@@ -4,6 +4,10 @@ body {
     padding-bottom: 128px;
 }
 
+.tango {
+    font-size:50px;
+}
+
 ul {
     padding: 0;
 }
@@ -47,6 +51,8 @@ hr {
     font-size: 1.25rem;
     line-height: 64px;
     font-weight: bold;
+    display: flex;
+    justify-content: center;
 }
 
 .header__link {
