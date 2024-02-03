@@ -1,0 +1,51 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block extra_style %}
+<link rel="stylesheet" href="{% static 'main/css/product_sell.css' %}">
+{% endblock %}
+
+{% block header %}
+<header class="header">
+    <div class="header__item">
+        <a href="javascript:window.history.back()" class="header__link">
+            <i class="fa-solid fa-xmark fa-2x"></i>
+        </a>
+        <div class="header__title">
+            {% block header_title %}単語の情報を入力{% endblock %}
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<div class="product-form-container">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="product-information-container">
+            <p class="section-title">単語の情報</p>
+            <div class="category-wrapper">
+                <p class="category-section-title">カテゴリー</p>
+                <p class="product-category">{{ text_form.genre }}</p>
+            </div>
+            <div class="status-wrapper">
+                <p class="stauts-section-title">単語</p>
+                <p class="product-status">{{ text_form.name }}</p>
+            </div>
+        </div>
+        <div class="product-description-container">
+            <p class="section-title">単語の訳</p>
+            <div class="product-name-wrapper">
+                <p class="product-name-form">{{ text_form.yaku }}</p>
+            </div>
+            <div class="product-explanation-wrapper">
+                <p class="product-explanation-form">{{ text_form.ex_1 }}</p>
+            </div>
+            <div class="product-explanation-wrapper">
+                <p class="product-explanation-form">{{ text_form.ex_1_yaku }}</p>
+            </div>
+        </div>
+        <button type="submit" class="product-sell-btn">単語を投稿</button>
+    </form>
+</div>
+{% endblock %}

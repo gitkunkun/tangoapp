@@ -1,0 +1,36 @@
+
+.word_detail{
+    margin-left:5%;
+    display:flex;
+    flex-wrap:nowrap;
+    align-items: center;
+}
+
+.word_yaku{
+    margin-left:5px;
+    font-size:20px
+}
+
+.word{
+    font-size:25px;
+}
+
+.reibun-container{
+    margin-top:20px;
+    margin-left:5%;
+}
+
+.reibunn{
+    font-size: 25px;
+    font-weight: 900;
+}
+
+.genre-title{
+    font-size:20px;
+}
+
+.questioner{
+    margin-left:5%;
+    margin-top:30px;
+}
+

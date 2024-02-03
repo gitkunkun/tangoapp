@@ -1,0 +1,20 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block extra_style %}
+<link rel="stylesheet" href="{% static 'main/css/words_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="word_detail">
+    <div class="word">・{{ words.name }}</div>
+    <p class="word_yaku">・・・{{ words.yaku }}</p>
+</div>
+<div class="reibun-container">
+    <div class="reibunn">例文</div>
+    <p class="genre-title">{{ words.ex_1 }}</p>
+    <p class="genre-title">{{ words.ex_1_yaku }}</p>
+
+</div>
+<div class="questioner">出題者:{{ words.questioner }}</div>
+{% endblock %}

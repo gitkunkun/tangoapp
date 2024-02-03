@@ -6,8 +6,8 @@
 {% endblock %}
 
 {% block content %}
+<h1 class="sinchaku">新着の単語</h1>
 <div class="new-product-container">
-    <h1>新着の単語</h1>
         {% for word in words %}
         <li class="word-item">
             <a href="{% url 'main:words_detail' word.pk %}">
@@ -16,8 +16,8 @@
         </li>
         {% endfor %}
 </div>
+    <h1 class="janrusagasu">ジャンルから探す</h1>
 <div class="genre-container">
-    <h1>ジャンルから探す</h1>
     <ul class="genre-list">
         {% for genre in genres %}
         <li class="genre-item">

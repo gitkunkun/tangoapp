@@ -19,8 +19,8 @@ class Words(models.Model):
     genre = models.ForeignKey(
         Genre, on_delete=models.SET_NULL, null=True, related_name="words"
     )
-    ex_1 = models.CharField(max_length=50, null=True)
-    ex_1_yaku = models.CharField(max_length=50, null=True)
+    ex_1 = models.CharField(max_length=100, null=True)
+    ex_1_yaku = models.CharField(max_length=100, null=True)
 
     def __str__(self):
         return f"単語名:{self.name},出題者:{self.questioner}"
@@ -31,4 +31,13 @@ class Misstake(models.Model):
     ),
     miss_word = models.ForeignKey(
         Words, on_delete=models.CASCADE, related_name="missword"
+    )
+
+class WordsImage(models.Model):
+    word = models.ForeignKey(
+        Words, on_delete=models.CASCADE, related_name="words_image"
+    )
+    image = models.ImageField(
+        upload_to="word_image/",
+        blank=True,
     )
