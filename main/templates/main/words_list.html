@@ -1,0 +1,24 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block extra_style %}
+<link rel="stylesheet" href="{% static 'main/css/words_list.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="product-nav">
+    <div>投稿されている単語</div>
+    <p class="color-green">ジャンル:</p>
+</div>
+<div class="product-list-container">
+    <ul class="product-list">
+        {% for word in words %}
+        <li class="product-item">
+            <a href="{% url 'main:words_detail' word.pk %}">
+                <div class="word">{{ word.name }}</div>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

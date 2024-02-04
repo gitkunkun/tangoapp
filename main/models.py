@@ -41,3 +41,9 @@ class WordsImage(models.Model):
         upload_to="word_image/",
         blank=True,
     )
+
+class Like(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="likes_given")
+    word = models.ForeignKey(
+        Words, on_delete=models.CASCADE, related_name="likes_received"
+    )

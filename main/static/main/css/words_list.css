@@ -1,0 +1,20 @@
+.product-item {
+    position:static;
+    width: 30%;
+    height: 70px;
+    margin-bottom: 12px;
+    padding: 8px;
+    border: 1px solid rgb(211, 211, 211);
+    border-width:2px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    overflow: hidden;
+    display:flex;
+    flex-wrap: wrap;
+}
+
+.product-list{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}

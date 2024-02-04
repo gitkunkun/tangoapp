@@ -1,6 +1,13 @@
 from django import forms
 from .models import Words
 
+class WordsSearchForm(forms.Form):
+    keyword = forms.CharField(
+        label="検索",
+        required=False,
+        widget=forms.TextInput(attrs={"placeholder":"単語を検索"})
+    )
+
 class WordUploadForm(forms.ModelForm):
     class Meta:
         model = Words

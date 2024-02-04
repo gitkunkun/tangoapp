@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>フリマアプリ</title>
+    <title>単語学習サイト</title>
     <link rel="stylesheet" href="{% static 'main/css/base.css' %}">
     {% block extra_style %}{% endblock %}
 </head>
@@ -18,6 +18,11 @@
             <div class="header__title">
                 {% block header_title %}<a href="{% url 'main:home' %}" class = "tango">BeWorder</a>{% endblock %}
             </div>
+        </div>
+        <div class="header_form">
+            <form action="{% url 'main:words_list' %}" method="GET">
+                {{ search_form.keyword }}
+            </form>
         </div>
     </header>
     {% endif %}
@@ -44,7 +49,7 @@
         <div class="footer__item">
             <a href="" class="footer__link">
                 <div class="footer__icon"><i class="fa-regular fa-bell"></i></div>
-                <div class="footer__label">通知</div>
+                <div class="footer__label">単語クイズに挑戦</div>
             </a>
         </div>
         <div class="footer__item">

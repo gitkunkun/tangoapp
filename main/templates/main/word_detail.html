@@ -3,6 +3,7 @@
 
 {% block extra_style %}
 <link rel="stylesheet" href="{% static 'main/css/words_detail.css' %}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
 {% endblock %}
 
 {% block content %}
@@ -14,7 +15,25 @@
     <div class="reibunn">例文</div>
     <p class="genre-title">{{ words.ex_1 }}</p>
     <p class="genre-title">{{ words.ex_1_yaku }}</p>
-
+</div>
+<div class="product-like-button">
+    {% if words.is_liked %}
+    <form method="POST" action="{% url 'main:unlike' words.pk %}">
+        {% csrf_token %}
+        <div class="like-container">
+            <button type="submit" class="product-unlike-btn"><i class="fa-solid fa-heart" style="color: #2B8F38;"></i></button>
+            <p class="like-count-liked">{{ words.likes_count }}</p>
+        </div>
+    </form>
+    {% else %}
+    <form method="POST" action="{% url 'main:like' words.pk %}">
+        {% csrf_token %}
+        <div class="like-container">
+            <button type="submit" class="product-like-btn"><i class="fa-regular fa-heart"></i></button>
+            <p class="like-count">{{ words.likes_count }}</p>
+        </div>
+    </form>
+    {% endif %}
 </div>
 <div class="questioner">出題者:{{ words.questioner }}</div>
 {% endblock %}
