@@ -9,5 +9,6 @@ urlpatterns = [
     path("word_upload", views.word_upload, name="word_upload"),
     path("words_list", views.WordsListView.as_view(), name="words_list"),
     path("product_like/<int:pk>", views.word_like, name="like"),
-    path("product_unlike/<int:pk>", views.word_unlike, name="unlike")
+    path("product_unlike/<int:pk>", views.word_unlike, name="unlike"),
+    path("quiz", views.QuizView.as_view(), name="quiz")
 ]

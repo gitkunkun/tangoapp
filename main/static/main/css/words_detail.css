@@ -10,7 +10,14 @@
     text-align: center;
 }
 
-
+button{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+         appearance: none;
+    border:0;
+    background-color: white;
+    font-size:30px;
+}
 
 .word_yaku{
     margin-left:5px;
@@ -39,5 +46,16 @@
     margin-left:5%;
     margin-top:30px;
 }
+
+.product-unlike-btn {
+    text-align: center;
+    color:rgb(255, 131, 224)
+}
+
+.product-like-btn {
+    text-align: center;
+    color:rgb(124, 124, 124)
+}
+
 
 

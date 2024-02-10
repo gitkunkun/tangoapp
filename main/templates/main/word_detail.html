@@ -21,7 +21,7 @@
     <form method="POST" action="{% url 'main:unlike' words.pk %}">
         {% csrf_token %}
         <div class="like-container">
-            <button type="submit" class="product-unlike-btn"><i class="fa-solid fa-heart" style="color: #2B8F38;"></i></button>
+            <button type="submit" class="product-unlike-btn">&hearts;</button>
             <p class="like-count-liked">{{ words.likes_count }}</p>
         </div>
     </form>
@@ -29,7 +29,7 @@
     <form method="POST" action="{% url 'main:like' words.pk %}">
         {% csrf_token %}
         <div class="like-container">
-            <button type="submit" class="product-like-btn"><i class="fa-regular fa-heart"></i></button>
+            <button type="submit" class="product-like-btn">&hearts;</button>
             <p class="like-count">{{ words.likes_count }}</p>
         </div>
     </form>

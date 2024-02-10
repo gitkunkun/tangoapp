@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>単語学習サイト</title>
+    <title>BeWorder</title>
     <link rel="stylesheet" href="{% static 'main/css/base.css' %}">
     {% block extra_style %}{% endblock %}
 </head>
@@ -47,7 +47,7 @@
             </a>
         </div>
         <div class="footer__item">
-            <a href="" class="footer__link">
+            <a href="{% url 'main:quiz' %}" class="footer__link">
                 <div class="footer__icon"><i class="fa-regular fa-bell"></i></div>
                 <div class="footer__label">単語クイズに挑戦</div>
             </a>

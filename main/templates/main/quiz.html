@@ -1,0 +1,17 @@
+{% extends "main/base.html" %}
+{% load static %}
+    
+{% block extra_style %}
+<link rel="stylesheet" href="{% static 'main/css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="japanese">{{ word.ex_1_yaku }}</div>
+<div class="ex">{{ ex }}</div>
+<div class="answer">answer:{{ word.name }}</div>
+<form method="POST" action="{% url 'main:home'}">
+    {% csrf_token %}
+    <div class="form">{{ form.answer }}</div>
+    <button type="submit" class="product-sell-btn">回答を送信</button>
+</form>
+{% endblock %}

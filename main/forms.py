@@ -41,3 +41,10 @@ class WordUploadForm(forms.ModelForm):
                 attrs={"placeholder": "例文-和訳"}
             ),
         }
+
+class QuizAnswerForm(forms.Form):
+    answer = forms.CharField(
+        label="答え",
+        required=True,
+        widget=forms.TextInput(attrs={"placeholder":"回答を入力"})
+    )

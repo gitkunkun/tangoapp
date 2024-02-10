@@ -1,10 +1,10 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView
-from .forms import WordUploadForm, WordsSearchForm
+from .forms import WordUploadForm, WordsSearchForm, QuizAnswerForm
 from .models import Genre, Words, Misstake, Like
 from django.db.models import Count, Exists, OuterRef
 from django.shortcuts import render, redirect, get_object_or_404
-
+import random
 class HomeView(LoginRequiredMixin, ListView):
     template_name = "main/home.html"
     model = Words
@@ -16,6 +16,7 @@ class HomeView(LoginRequiredMixin, ListView):
             queryset
             .order_by("-uploaded_at")[:4]
         )
+        print(queryset)
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -87,3 +88,44 @@ class WordsListView(LoginRequiredMixin, ListView):
                     queryset = queryset.filter(name__icontains=k)
         return queryset       
         
+class QuizView(ListView,LoginRequiredMixin):
+    template_name = "main/quiz.html"
+    model = Words
+    context_object_name = "word"
+    A = 0
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(likes_received__user=self.request.user)
+        counter = 0
+        for i in queryset:
+            counter += 1
+        global A
+        A = random.randint(0,counter-1)
+        queryset = queryset[A]
+
+        return queryset
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        papa = Words.objects.filter(likes_received__user=self.request.user)
+        global A
+        name = papa[A].name
+        example = papa[A].ex_1
+        print(example)
+        target = name
+        r = example.rfind(target)
+        name_len = len(name)
+        after_example = example[r+name_len+1:]
+        before_example = example[:r]
+        print(before_example)
+        t = after_example.find(" ")
+        after_example = after_example[t+1:]
+        print(before_example)
+        print(after_example)
+        B =""
+        for i in range(0,name_len):
+            B += "_"
+        context["ex"] = before_example + B + " " + after_example
+        answer_form = QuizAnswerForm()
+        context["form"] = answer_form
+        return context
