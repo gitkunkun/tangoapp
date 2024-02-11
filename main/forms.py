@@ -44,7 +44,7 @@ class WordUploadForm(forms.ModelForm):
 
 class QuizAnswerForm(forms.Form):
     answer = forms.CharField(
-        label="答え",
+        label="",
         required=True,
         widget=forms.TextInput(attrs={"placeholder":"回答を入力"})
     )

@@ -1,0 +1,17 @@
+{% extends "main/base.html" %}
+{% load static %}
+    
+{% block extra_style %}
+<link rel="stylesheet" href="{% static 'main/css/quiz_result.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="answer">あなたの答え:{{ answer }}</div>
+<div class="seikai">正解:{{ word.name }}</div>
+{% if answer == word.name %}
+    <div class="result_true">正解!!</div>
+{% else %}
+    <div class="result_false">残念、不正解・・</div>
+{% endif %}
+<a href="{% url 'main:quiz' %}">次の問題へ</a>
+{% endblock %}

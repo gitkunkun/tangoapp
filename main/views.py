@@ -88,44 +88,91 @@ class WordsListView(LoginRequiredMixin, ListView):
                     queryset = queryset.filter(name__icontains=k)
         return queryset       
         
-class QuizView(ListView,LoginRequiredMixin):
-    template_name = "main/quiz.html"
-    model = Words
-    context_object_name = "word"
-    A = 0
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        queryset = queryset.filter(likes_received__user=self.request.user)
-        counter = 0
-        for i in queryset:
-            counter += 1
-        global A
-        A = random.randint(0,counter-1)
-        queryset = queryset[A]
+# class QuizView(ListView,LoginRequiredMixin):
+#     template_name = "main/quiz.html"
+#     model = Words
+#     context_object_name = "word"
+#     A = 0
+#     def get_queryset(self):
+#         queryset = super().get_queryset()
+#         queryset = queryset.filter(likes_received__user=self.request.user)
+#         counter = 0
+#         for i in queryset:
+#             counter += 1
+#         global A
+#         A = random.randint(0,counter-1)
+#         queryset = queryset[A]
 
-        return queryset
+#         return queryset
     
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        papa = Words.objects.filter(likes_received__user=self.request.user)
-        global A
-        name = papa[A].name
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         papa = Words.objects.filter(likes_received__user=self.request.user)
+#         global A
+#         name = papa[A].name
+#         example = papa[A].ex_1
+#         print(example)
+#         target = name
+#         r = example.rfind(target)
+#         name_len = len(name)
+#         after_example = example[r+name_len+1:]
+#         before_example = example[:r]
+#         print(before_example)
+#         t = after_example.find(" ")
+#         after_example = after_example[t+1:]
+#         print(before_example)
+#         print(after_example)
+#         B =""
+#         for i in range(0,name_len):
+#             B += "_"
+#         context["ex"] = before_example + B + " " + after_example
+#         answer_form = QuizAnswerForm()
+#         context["form"] = answer_form
+#         return context
+number = 0
+def quiz(request):
+    if request.method == "GET":
+        papa = Words.objects.filter(likes_received__user=request.user)
+        counter = 0
+        for i in papa:
+            counter += 1
+        A = random.randint(0,counter-1)
+        word_name = papa[A].name
         example = papa[A].ex_1
-        print(example)
-        target = name
+        target = word_name
         r = example.rfind(target)
-        name_len = len(name)
+        name_len = len(word_name)
         after_example = example[r+name_len+1:]
         before_example = example[:r]
-        print(before_example)
         t = after_example.find(" ")
         after_example = after_example[t+1:]
-        print(before_example)
-        print(after_example)
         B =""
         for i in range(0,name_len):
             B += "_"
-        context["ex"] = before_example + B + " " + after_example
+        ex = before_example + B + " " + after_example
+        word = papa[A]
         answer_form = QuizAnswerForm()
-        context["form"] = answer_form
-        return context
+        global number
+        number = A
+    elif request.method == "POST":
+        answer_form = QuizAnswerForm(request.POST)
+        if answer_form.is_valid():
+            answer = answer_form.cleaned_data["answer"]
+            papa = Words.objects.filter(likes_received__user=request.user)
+            # if papa[number].name != answer:
+            #     miss = Misstake.objects.create(
+            #         misstake = request.user,
+            #         miss_word = papa[number]
+            #     )
+            word = papa[number]
+            context = {
+                "answer": answer,
+                "word": word,
+            }
+            return render(request, "main/quiz_result.html", context)
+    context = {
+        "text_form": answer_form,
+        "word": word,
+        "ex": ex,
+    }
+    return render(request, "main/quiz.html", context)
